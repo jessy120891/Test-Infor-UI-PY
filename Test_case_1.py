@@ -22,11 +22,12 @@ class Test_case_1():
 
 
   def test_searchMessageErrors(self):
-
-    self.driver.find_element(By.CLASS_NAME, 'sb-searchbox__button ').click()
-    WebDriverWait(self.driver, 5000).until(expected_conditions.visibility_of(self.driver.find_element(By.CLASS_NAME,"fe_banner__message")))
-    poptext = self.driver.find_element(By.CLASS_NAME, 'fe_banner__message').text
-    assert(poptext == "Error:\nPlease enter a destination to start searching.")  
+    self.driver.delete_all_cookies()
+    self.driver.execute_script('localStorage.clear();')
+    self.driver.find_element(By.XPATH, "//span[contains(.,'Search')]").click()
+    WebDriverWait(self.driver, 5000).until(expected_conditions.visibility_of(self.driver.find_element(By.XPATH,'//form/div/div/div/div[2]/div')))
+    poptext = self.driver.find_element(By.XPATH, '//form/div/div/div/div[2]/div').text
+    assert("enter a destination to start searching.") in poptext 
 
   def teardown_method(self, method):
     self.driver.quit()

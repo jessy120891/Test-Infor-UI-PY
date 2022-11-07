@@ -32,7 +32,8 @@ class Test_case_2():
     self.driver.maximize_window()
     self.driver.get("https://www.booking.com")
     self.driver.delete_all_cookies()
-
+    self.driver.execute_script('localStorage.clear();')
+    
     WebDriverWait(self.driver, 5000).until(expected_conditions.visibility_of(self.driver.find_element(By.CLASS_NAME,"xp__dates-inner")))
     self.driver.find_element(By.CLASS_NAME,"xp__dates-inner").click()
     WebDriverWait(self.driver, 5000).until(expected_conditions.visibility_of(self.driver.find_element(By.CLASS_NAME,"bui-calendar__main.b-a11y-calendar-contrasts")))
